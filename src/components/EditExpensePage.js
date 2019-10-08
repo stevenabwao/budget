@@ -47,4 +47,4 @@ export class EditExpensePage extends React.Component {
         };
     }
 
-export default connect(mapStateToProps)(EditExpensePage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);
