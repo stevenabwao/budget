@@ -1,12 +1,11 @@
 import moment from 'moment';
+
 //Get visible expenses
 export default (expenses, {text,sortBy,startDate,endDate}) => {
     return expenses.filter((expense) => {
-        const createdMoment = moment(expense.createdAt);
-        //const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
-        const startDateMatch = startDate ? startDate.isSameOrBefore(createdMoment, 'day') : true;
-        const endDateMatch = endDate ? endDate.isSameOrAfter(createdMoment, 'day') : true;
-        //const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+        const createdAtMoment = moment(expense.createdAt);
+        const startDateMatch = startDate ? startDate.isSameOrBefore(createdAtMoment, 'day') : true;
+        const endDateMatch = endDate ? endDate.isSameOrAfter(createdAtMoment, 'day') : true;
         const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
         return startDateMatch && endDateMatch && textMatch;
@@ -16,5 +15,5 @@ export default (expenses, {text,sortBy,startDate,endDate}) => {
         } else if(sortBy === 'amount') {
             return a.amount < b.amount ? 1 : -1;
         }
-    })
-}
+    });
+};
